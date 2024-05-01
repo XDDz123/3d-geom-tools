@@ -46,3 +46,50 @@ b = \begin{bmatrix}~
 Then solve the least squares problem: $\large x = (A^TA)^{-1}A^Tb$.  </br></br>
 <img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/eb727abb-0016-4e22-ad06-8c9f2ad00ae2" width="490" height="420"> 
 
+## Uniform Laplace
+### Mean Curvature
+The uniform discretization is given by the following equation:</br>
+```math
+\Delta_{uni} f(v_i) := \dfrac{1}{\mid\mathcal{N}_1(v_i)\mid}\sum\limits_{v_j \in \mathcal{N}_1(v_i)} (x_j - x_i) \approx -2Hn
+```
+The laplace operator $L$ can be computed by:</br>
+```math
+L_{ij} = -1 \text{~if~} i \neq j, j \in \mathcal{N}_1(v_i) \\
+```
+```math
+L_{ij} = \mid\mathcal{N}_1(v_i)\mid \text{~if~} i = j
+```
+```math
+L_{ij} = 0 \text{~otherwise}
+```
+This means that we can construct the laplace operator through the
+neighborhood information at each vertex. Specifically, the
+number of neighbors of each vertex is recorded on the diagonal and the
+indices of their corresponding neighbors are set to 1.
+
+The mean curvature can then be computed by applying the laplace operator
+on the mesh vertices:
+```math
+H = \dfrac{\|\Delta_s\text{x}\|}{2}
+```
+<img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/f4dd1870-8b7d-4f9d-982b-64a037420a75" width="50%" height="50%"> 
+<img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/d1569844-d08a-4624-9c73-a08163c5ee89" width="50%" height="50%"> 
+
+### Gaussian Curvature
+Gaussian curvature can be computed from the angle deficit at each vertex. </br>
+
+```math
+\text{angle deficit} = 2\pi - \sum\limits_{j} \theta_j
+```
+where $j$ is the angle at the current vertex in each of its connected triangles.</br>
+In a perfectly flat region we would expect the angles to add up to $2\pi$. </br>
+
+To obtain the gaussian curvature, we would need to normalize using Area $A$:</br>
+```math
+K = (2\pi - \sum\limits_{j} \theta_j) / A
+```
+
+The form of area chosen for this implementation was barycentric cells,
+where edge mid points and triangle barycenters are connected to form an area. This method was chosen for its simplicity, as the resulting area
+is simply $1/3$ of the triangle areas. </br></br>
+<img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/1e9435b0-f579-4be6-bef9-ef7e0494048d" width="50%" height="50%"> 
