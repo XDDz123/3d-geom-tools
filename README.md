@@ -43,6 +43,6 @@ b = \begin{bmatrix}~
 \vdots
 \end{bmatrix}
 ```
-Then solve the least squares problem: $\large x = (A^TA)^{-1}A^Tb$.  </br>
+Then solve the least squares problem: $\large x = (A^TA)^{-1}A^Tb$.  </br></br>
 <img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/eb727abb-0016-4e22-ad06-8c9f2ad00ae2" width="490" height="420"> 
 
