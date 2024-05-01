@@ -56,15 +56,11 @@ The uniform discretization is given by the following equation:</br>
 The laplace operator $\large L$ can be computed by:</br>
 ```math
 \large
-L_{ij} = -1 \text{~if~} i \neq j, j \in \mathcal{N}_1(v_i) \\
-```
-```math
-\large
-L_{ij} = \mid\mathcal{N}_1(v_i)\mid \text{~if~} i = j
-```
-```math
-\large
-L_{ij} = 0 \text{~otherwise}
+L_{ij} = \begin{cases}~
+-1 & \text{~if~} i \neq j, j \in \mathcal{N}_1(v_i) \\
+\mid\mathcal{N}_1(v_i)\mid & \text{~if~} i = j \\
+~0 & \text{~otherwise}
+\end{cases}
 ```
 This means that we can construct the laplace operator through the
 neighborhood information at each vertex. Specifically, the
@@ -111,20 +107,18 @@ In matrix form we can define the discrete laplace operator $\large L$ by: </br>
 \large L = M^{-1}C
 ```
 ```math
-\large C_{i_j} = (cot\alpha_{ij} + cot\beta_{ij})/2 \text{~if~} i\neq j, j \in \mathcal{N}_1(v_i)
-```
-```math
-\large C_{i_j} = -\sum_{v_j \in \mathcal{N}_1(v_i)} ((cot\alpha_{ij} + cot\beta_{ij})/2) \text{~if~} i=j
-```
-```math
-\large C_{i_j} = 0 \text{~otherwise}
+\large C_{i_j} = \begin{cases}
+~(cot\alpha_{ij} + cot\beta_{ij})/2 & \text{~if~} i\neq j, j \in \mathcal{N}_1(v_i) \\
+-\sum_{v_j \in \mathcal{N}_1(v_i)} ((cot\alpha_{ij} + cot\beta_{ij})/2) & \text{~if~} i=j \\
+~0 & \text{~otherwise}
+\end{cases}
 ```
 ```math
 \large M^{-1} = \text{diag}(...,\frac{1}{A_i},...)
 ```
 where $\large \alpha_{ij}$ and $\large \beta_{ij}$ are the angles opposite to each edge connected to the current vertex.
 
-At each neighbor of each vertex, we locate the connected faces that contain both vertices (e.g.~the current edge) and record the angles $\large \alpha_{ij}$ and $\large \beta_{ij}$ (at the other
+At each neighbor of each vertex, we locate the connected faces that contain both vertices (e.g. the current edge) and record the angles $\large \alpha_{ij}$ and $\large \beta_{ij}$ (at the other
 vertex that is not the current pair), which eventually formulates the $\large C$ matrix. In addition, each connected face was accumulated in a vector to construct the $\large M$ matrix. </br></br>
 <img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/6aaaabf2-7ee1-400b-a06e-87900c503f2a" width="50%" height="50%"> 
 
@@ -190,3 +184,61 @@ from \(M\), we must first symmetrize
 \large (M - \lambda C) P^{(t+1)} = M P^{(t)}
 ```
 the resulting sparse system is symmetric positive definite and can be solved using methods such as iterative conjugate gradients.
+
+## Geodesics in Heat
+This section implements techniques described in the paper [Geodesics in Heat: A New Approach to Computing Distance Based on Heat Flow](https://ddg.math.uni-goettingen.de/pub/GeodesicsInHeat.pdf) by Crane, Weischedel, and Wardetzky. </br>
+In general terms, the aim is to compute the distance between vertices on a surface mesh or manifold by calculating the geodesic distance based on the physical mechanics of heat flow.  </br></br>
+The outline of the heat method can described as follows: </br>
+1. Standard geodesic distance is computed by solving the [eikonal equation](https://en.wikipedia.org/wiki/Eikonal_equation) $\large |\triangledown\phi| = 1$, where $\phi$ is the geodesic distance. </br>
+   However, most processes involved in computing this measure are often non-linear.</br></br>
+2. In order to solve for $\large \phi$, we take advantage between the relationship between heat distribution and distance using Varadhan’s formula:</br>
+ ```math
+ \large \displaystyle{\phi(x, y) = \lim_{t \to 0} \sqrt{-4t\text{log}k_{t,x}(y)}} \text{, where } k_{t,x} \text{ is the heat kernel.}
+ ```
+3. Reconstructions of $\large k_{t,x}$ are found to be extremely sensitive to numerical errors. </br> The paper cirumvents this problem with the following procedure: </br>
+   * Given a reconstruction of the heat kernel $\large u$
+   * Compute its gradient $\large -\triangledown u$
+   * Then normalize such that the output gradient field $\large X = -\displaystyle{\frac{\triangledown u }{\|\triangledown u\|}}$ is only dependent on the direction of the gradient and robust to errors in magnitude. </br></br>
+4. Lastly, $\large \phi$ can be computed by minimizing the equation $\large \|\triangledown \phi - X\|^2$. This minimization problem can be solved linearly with $\large \Delta \phi = \triangledown X$.
+### Implementation
+The geodesic distance on manifolds can be computed with the following steps:
+1. Compute the cotangent Laplacian matrix $\large L_C$ and the weight (area) matrix $\large A$. </br>
+* The discretization of the Laplacian can be computed from:
+```math
+\large 
+(Lu)_i=\frac{1}{2A_i}\displaystyle{\sum_j(cota_{ij}+cot\beta_{ij})(u_j-u_i)}
+```
+```math
+\large 
+\text{Where } A_i = \frac{\text{Area of one ring neighbors at i}}{3}, \alpha_{ij} ~\&~ \beta_{ij} \text{~are the angles opposite to edge}_{ij}
+```
+* In matrix form we can define the discrete Laplacian operator with
+```math
+\large 
+L_{C_{ij}} = \begin{cases}
+(cot\alpha_{ij} + cot\beta_{ij})/2, & \text{if  \(i\neq j, j \in \mathcal{N_1}(v_i)\)} \\
+-\sum_{v_j \in \mathcal{N}_1(v_i)} ((cot\alpha_{ij} + cot\beta_{ij})/2), & \text{if \(i=j\)} \\
+0, & \text{otherwise}
+\end{cases}
+```
+* For Dirichlet boundary conditions, boundary vertices have $\large L_{C_{ij}} = 0$ for $\large j \in {\mathcal{N_1}}(v_i)$. </br>
+2. Compute the optimal time $\large t = mh^2$, where $m=1$ and $h$ is the mean distance between all vertices.
+3. Compute the heat flow $\large u$ with $\large (A - tL_C)u = \delta_\gamma$, where the Kronecker delta $\large \delta_\gamma$ is a vector where heat source vertices are set to 1 and other vertices to 0.
+4. Compute the gradient $\triangledown u$ with $\large \triangledown u = \frac{1}{2A_f}\displaystyle{\sum_i u_i(N \times e_i)}$, where $\large A_f$ is the face area, $\large N_i$ is the face normal, and $\large e_i$ is the vector (edge) opposite of the current vertex orientated counter-clockwise.
+5. Compute the normalized vector field $\large X = \triangledown u / \| \triangledown u\|$.
+6. Compute the divergences of $\large X$ with $\large \triangledown\cdot X = \frac{1}{2}\displaystyle{\sum_j cot\theta_1(e_1 \cdot X_j) + cot\theta_2 (e_2 \cdot X_j)}$, where $\large \theta_1$ and $\large \theta_2$ are the 2 remaining vertex angles of the current face $\large j$, $\large e_1$ and $e\large _2$ are the edges opposite to $\large \theta_1$ and $\large \theta_2$ respectively.
+7. Compute the geodesics with $\large L_c\phi=\triangledown\cdot X$ by solving the linear system.
+  
+### Results
+<img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/5e2f1da8-8a97-4eb8-ae3f-781c5d1565c2" width="50%" height="50%">
+<img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/26e47ece-b692-4af9-b2a1-84416978af33" width="50%" height="50%"> 
+<img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/af5a7f11-998a-4fa3-a096-d86e5504cdc3" width="50%" height="50%"> 
+
+### Path finding
+A path finding algorithm was implemented to compute the shortest path between two vertices on a manifold. </br> 
+Given a start vertex and an end vertex, the geodesic distance at the end is computed. </br> 
+Starting at the start vertex, the algorithm moves the current vertex to the neighbor that is closest to the end vertex until current vertex reaches the designated destination. </br> 
+In the samples below, the blue line marks the shortest path. </br>  </br> 
+<img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/2f30d69a-ffbd-4f8b-8962-0b0dc16d030e" width="50%" height="50%">
+<img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/6027d04d-592b-4f83-b8d0-1fffb6aab5a7" width="50%" height="50%">
+<img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/a282f65d-0c26-4988-a5b8-cdd68c67b960" width="50%" height="50%">
