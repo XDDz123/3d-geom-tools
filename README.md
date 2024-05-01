@@ -130,7 +130,7 @@ vertex that is not the current pair), which eventually formulates the $\large C$
 
 ## Modal Analysis
 Based on equation 4 in the paper [Spectral Geometry Processing with Manifold Harmonics](https://doi.org/10.1111/j.1467-8659.2008.01122.x) by Vallet and Lévy. </br>
-The basis vectors can be computed as follows: 
+The basis vectors can be computed from the following derivation: 
 ```math 
 \large \Delta \phi_i = \lambda_i \phi_i
 ```
