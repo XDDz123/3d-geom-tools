@@ -162,6 +162,10 @@ The reconstruction for each dimension (of the vertices) can be computed by:
 ```math
 \large x \leftarrow \sum\limits_{i=1}^{k}(x^T\phi_i)\phi_i
 ```
+####
+The following reconstructs the armadillo using $k$ eigen vectors.
+<img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/1d530eeb-f341-4b60-a5ca-fb23ac25f0e4" width="490" height="420"> 
+
 ## Mesh Smoothing
 ### Explicit Laplacian Mesh Smoothing
 Explicit smoothing is computed with the following equation:
