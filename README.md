@@ -3,10 +3,10 @@ This project implements an assortment of algorithms for processing 3D geometry.
 
 ## ICP
 The ICP algorithm could be described as follows: </br>
-1. Select a number of points for matching
+1. Select a number of points for matching.
 2. Match every point to their cloest counterpart in the other point set.
-3. Reject pairs based on distance or normal angles
-4. Minimize the error function such that after rotations and translations the distance between two scans are minimal
+3. Reject pairs based on distance or normal angles.
+4. Minimize the error function such that after rotations and translations distance between two scans are minimal.
   
 ### Point-to-point ICP
 Point-to-point ICP minimizes the error function: $\large E = \displaystyle \frac{1}{N_p} \displaystyle \sum_{i=1}^{N_p} |Rp_i + t - q_i|^2$. </br> 
