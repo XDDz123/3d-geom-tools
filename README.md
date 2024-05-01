@@ -1,7 +1,7 @@
 # 3D Geometry Tools
 This project implements an assortment of algorithms for processing 3D geometry.
 
-## ICP
+## Iterative Closest Point (ICP)
 The ICP algorithm could be described as follows: </br>
 1. Select a number of points for matching.
 2. Match every point to their cloest counterpart in the other point set.
@@ -168,3 +168,25 @@ The reconstruction for each dimension (of the vertices) can be computed by:
 ```math
 \large x \leftarrow \sum\limits_{i=1}^{k}(x^T\phi_i)\phi_i
 ```
+## Mesh Smoothing
+### Explicit Laplacian Mesh Smoothing
+Explicit smoothing is computed with the following equation:
+```math
+\large P^{(t+1)} = (I + \lambda L) P^{(t)}
+```
+where the Laplace-Beltrami operator is applied to the given mesh in
+small steps as defined by $\large \lambda$. <\br> 
+This process aims to slowly smooth out the given mesh/surface, however it is conditionally stable depending on the chosen magnitude of $\large \lambda$.
+
+### Implicit Laplacian Mesh Smoothing
+In contrast to explicit smoothing, implicit smoothing is unconditionally stable. <\br>
+Implicit smoothing is computed with the following equations:
+```math
+\large (I - \lambda L) P^{(t+1)} = P^{(t)}
+```
+Since $\large L = M^{-1} C$ is no longer symmetric after the normalization
+from \(M\), we must first symmetrize
+```math
+\large (M - \lambda C) P^{(t+1)} = M P^{(t)}
+```
+the resulting sparse system is symmetric positive definite and can be solved using methods such as iterative conjugate gradients.
