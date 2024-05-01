@@ -111,7 +111,7 @@ In matrix form we can define the discrete laplace operator $\large L$ by: </br>
 \large L = M^{-1}C
 ```
 ```math
-\large C_{i_j} = (cot\alpha_{ij} + cot\beta_{ij})/2 if i\neq j, j \in \mathcal{N}_1(v_i)
+\large C_{i_j} = (cot\alpha_{ij} + cot\beta_{ij})/2 \text{~if~} i\neq j, j \in \mathcal{N}_1(v_i)
 ```
 ```math
 \large C_{i_j} = -\sum_{v_j \in \mathcal{N}_1(v_i)} ((cot\alpha_{ij} + cot\beta_{ij})/2) \text{~if~} i=j
