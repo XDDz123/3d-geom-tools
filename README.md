@@ -53,7 +53,7 @@ The uniform discretization is given by the following equation:</br>
 \large
 \Delta_{uni} f(v_i) := \dfrac{1}{\mid\mathcal{N}_1(v_i)\mid}\sum\limits_{v_j \in \mathcal{N}_1(v_i)} (x_j - x_i) \approx -2Hn
 ```
-The laplace operator $L$ can be computed by:</br>
+The laplace operator $\large L$ can be computed by:</br>
 ```math
 \large
 L_{ij} = -1 \text{~if~} i \neq j, j \in \mathcal{N}_1(v_i) \\
