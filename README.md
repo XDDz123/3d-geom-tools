@@ -209,7 +209,6 @@ The geodesic distance on manifolds can be computed with the following steps:
 (Lu)_i=\frac{1}{2A_i}\displaystyle{\sum_j(cota_{ij}+cot\beta_{ij})(u_j-u_i)}
 ```
 ```math
-\large 
 \text{Where } A_i = \frac{\text{Area of one ring neighbors at i}}{3}, \alpha_{ij} ~\&~ \beta_{ij} \text{~are the angles opposite to edge}_{ij}
 ```
 * In matrix form we can define the discrete Laplacian operator with
@@ -222,11 +221,11 @@ L_{C_{ij}} = \begin{cases}
 \end{cases}
 ```
 * For Dirichlet boundary conditions, boundary vertices have $\large L_{C_{ij}} = 0$ for $\large j \in {\mathcal{N_1}}(v_i)$. </br>
-2. Compute the optimal time $\large t = mh^2$, where $\largem=1$ and $\largeh$ is the mean distance between all vertices.
-3. Compute the heat flow $\large u$ with $\large (A - tL_C)u = \delta_\gamma$, where the Kronecker delta $\large \delta_\gamma$ is a vector where heat source vertices are set to 1 and other vertices to 0.
-4. Compute the gradient $\triangledown u$ with $\large \triangledown u = \frac{1}{2A_f}\displaystyle{\sum_i u_i(N \times e_i)}$, where $\large A_f$ is the face area, $\large N_i$ is the face normal, and $\large e_i$ is the vector (edge) opposite of the current vertex orientated counter-clockwise.
-5. Compute the normalized vector field $\large X = \triangledown u / \| \triangledown u\|$.
-6. Compute the divergences of $\large X$ with $\large \triangledown\cdot X = \frac{1}{2}\displaystyle{\sum_j cot\theta_1(e_1 \cdot X_j) + cot\theta_2 (e_2 \cdot X_j)}$, where $\large \theta_1$ and $\large \theta_2$ are the 2 remaining vertex angles of the current face $\large j$, $\large e_1$ and $e\large _2$ are the edges opposite to $\large \theta_1$ and $\large \theta_2$ respectively.
+2. Compute the optimal time $\large t = mh^2$, where $\large m=1$ and $\large h$ is the mean distance between all vertices.</br>
+3. Compute the heat flow $\large u$ with $\large (A - tL_C)u = \delta_\gamma$, where the Kronecker delta $\large \delta_\gamma$ is a vector where heat source vertices are set to 1 and other vertices to 0.</br>
+4. Compute the gradient $\triangledown u$ with $\large \triangledown u = \frac{1}{2A_f}\displaystyle{\sum_i u_i(N \times e_i)}$, where $\large A_f$ is the face area, $\large N_i$ is the face normal, and $\large e_i$ is the vector (edge) opposite of the current vertex orientated counter-clockwise.</br>
+5. Compute the normalized vector field $\large X = \triangledown u / \| \triangledown u\|$.</br>
+6. Compute the divergences of $\large X$ with $\large \triangledown\cdot X = \frac{1}{2}\displaystyle{\sum_j cot\theta_1(e_1 \cdot X_j) + cot\theta_2 (e_2 \cdot X_j)}$, where $\large \theta_1$ and $\large \theta_2$ are the 2 remaining vertex angles of the current face $\large j$, $\large e_1$ and $e\large _2$ are the edges opposite to $\large \theta_1$ and $\large \theta_2$ respectively.</br>
 7. Compute the geodesics with $\large L_c\phi=\triangledown\cdot X$ by solving the linear system.
   
 ### Results
@@ -235,9 +234,9 @@ L_{C_{ij}} = \begin{cases}
 <img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/af5a7f11-998a-4fa3-a096-d86e5504cdc3" width="50%" height="50%"> 
 
 ### Path finding
-A path finding algorithm was implemented to compute the shortest path between two vertices on a manifold. </br> 
+A path finding algorithm was implemented to compute the shortest path between two vertices on a manifold. </br> </br> 
 Given a start vertex and an end vertex, the geodesic distance at the end is computed. </br> 
-Starting at the start vertex, the algorithm moves the current vertex to the neighbor that is closest to the end vertex until current vertex reaches the designated destination. </br> 
+Starting at the start vertex, the algorithm moves the current vertex to the neighbor that is closest to the end vertex until current vertex reaches the designated destination. </br> </br> 
 In the samples below, the blue line marks the shortest path. </br>  </br> 
 <img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/2f30d69a-ffbd-4f8b-8962-0b0dc16d030e" width="50%" height="50%">
 <img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/6027d04d-592b-4f83-b8d0-1fffb6aab5a7" width="50%" height="50%">
