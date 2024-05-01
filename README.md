@@ -222,7 +222,7 @@ L_{C_{ij}} = \begin{cases}
 \end{cases}
 ```
 * For Dirichlet boundary conditions, boundary vertices have $\large L_{C_{ij}} = 0$ for $\large j \in {\mathcal{N_1}}(v_i)$. </br>
-2. Compute the optimal time $\large t = mh^2$, where $m=1$ and $h$ is the mean distance between all vertices.
+2. Compute the optimal time $\large t = mh^2$, where $\largem=1$ and $\largeh$ is the mean distance between all vertices.
 3. Compute the heat flow $\large u$ with $\large (A - tL_C)u = \delta_\gamma$, where the Kronecker delta $\large \delta_\gamma$ is a vector where heat source vertices are set to 1 and other vertices to 0.
 4. Compute the gradient $\triangledown u$ with $\large \triangledown u = \frac{1}{2A_f}\displaystyle{\sum_i u_i(N \times e_i)}$, where $\large A_f$ is the face area, $\large N_i$ is the face normal, and $\large e_i$ is the vector (edge) opposite of the current vertex orientated counter-clockwise.
 5. Compute the normalized vector field $\large X = \triangledown u / \| \triangledown u\|$.
