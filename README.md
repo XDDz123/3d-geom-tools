@@ -241,3 +241,8 @@ In the samples below, the blue line marks the shortest path. </br>  </br>
 <img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/2f30d69a-ffbd-4f8b-8962-0b0dc16d030e" width="50%" height="50%">
 <img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/6027d04d-592b-4f83-b8d0-1fffb6aab5a7" width="50%" height="50%">
 <img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/a282f65d-0c26-4988-a5b8-cdd68c67b960" width="50%" height="50%">
+
+### Geodesics under noise
+Gaussian noise was added to the mesh vertices, where the $\sigma$ of the gaussian distribution is based on the bounding box size of the mesh in each dimension scaled by a factor $k$. </br>
+As expected, the algorithm is robust. Similar to the results of the paper, the computed geodesic distances are reasonable even when the amount of noise is relatively large.  </br> </br>
+<img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/9c7aae53-7d8a-492c-ad31-028a1dae1a1d" width="50%" height="50%">
