@@ -162,8 +162,8 @@ The reconstruction for each dimension (of the vertices) can be computed by:
 ```math
 \large x \leftarrow \sum\limits_{i=1}^{k}(x^T\phi_i)\phi_i
 ```
-####
-The following reconstructs the armadillo using $k$ eigen vectors.
+#### Sample
+The following reconstructs the armadillo using $k$ eigen vectors. </br></br>
 <img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/1d530eeb-f341-4b60-a5ca-fb23ac25f0e4" width="490" height="420"> 
 
 ## Mesh Smoothing
@@ -173,11 +173,11 @@ Explicit smoothing is computed with the following equation:
 \large P^{(t+1)} = (I + \lambda L) P^{(t)}
 ```
 where the Laplace-Beltrami operator is applied to the given mesh in
-small steps as defined by $\large \lambda$. <\br> 
+small steps as defined by $\large \lambda$. </br> 
 This process aims to slowly smooth out the given mesh/surface, however it is conditionally stable depending on the chosen magnitude of $\large \lambda$.
 
 ### Implicit Laplacian Mesh Smoothing
-In contrast to explicit smoothing, implicit smoothing is unconditionally stable. <\br>
+In contrast to explicit smoothing, implicit smoothing is unconditionally stable.
 Implicit smoothing is computed with the following equations:
 ```math
 \large (I - \lambda L) P^{(t+1)} = P^{(t)}
