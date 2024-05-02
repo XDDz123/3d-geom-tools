@@ -1,5 +1,12 @@
 # 3D Geometry Tools
-This project implements an assortment of algorithms for processing 3D geometry.
+This project implements an assortment of algorithms for processing 3D geometry:
+* [Iterative Closest Point](https://github.com/XDDz123/3d-geom-tools?tab=readme-ov-file#iterative-closest-point-icp)
+* [Uniform Laplace](https://github.com/XDDz123/3d-geom-tools?tab=readme-ov-file#uniform-laplace)
+* [Non-uniform Laplace (Discrete Laplace-Beltrami)](https://github.com/XDDz123/3d-geom-tools?tab=readme-ov-file#non-uniform-laplace-discrete-laplace-beltrami)
+* [Modal Analysis](https://github.com/XDDz123/3d-geom-tools?tab=readme-ov-file#modal-analysis)
+* [Mesh Smoothing](https://github.com/XDDz123/3d-geom-tools?tab=readme-ov-file#mesh-smoothing)
+* [Geodesics](https://github.com/XDDz123/3d-geom-tools?tab=readme-ov-file#geodesics-in-heat)
+  * [Path finding](https://github.com/XDDz123/3d-geom-tools?tab=readme-ov-file#path-finding)
 
 ## Iterative Closest Point (ICP)
 The ICP algorithm could be described as follows: </br>
