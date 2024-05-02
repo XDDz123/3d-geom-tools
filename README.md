@@ -163,8 +163,9 @@ The reconstruction for each dimension (of the vertices) can be computed by:
 \large x \leftarrow \sum\limits_{i=1}^{k}(x^T\phi_i)\phi_i
 ```
 #### Sample
-The following reconstructs the armadillo using $k$ eigen vectors. </br></br>
+The following reconstructs the model using $k$ eigen vectors. </br></br>
 <img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/1d530eeb-f341-4b60-a5ca-fb23ac25f0e4" width="490" height="420"> 
+<img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/263e1107-2ff9-4b3d-b32f-f380fbc687a0" width="490" height="420"> 
 
 ## Mesh Smoothing
 ### Explicit Laplacian Mesh Smoothing
