@@ -171,9 +171,9 @@ The reconstruction for each dimension (of the vertices) can be computed by:
 ```
 #### Sample
 The following reconstructs the model using $k$ eigen vectors. </br></br>
-<img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/1d530eeb-f341-4b60-a5ca-fb23ac25f0e4" width="490" height="420"> 
-<img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/263e1107-2ff9-4b3d-b32f-f380fbc687a0" width="490" height="420"> 
-<img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/6792d1aa-0a55-4e90-8e01-72bda70ee3ce" width="490" height="420"> 
+<img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/1d530eeb-f341-4b60-a5ca-fb23ac25f0e4" width="50%" height="50%"> 
+<img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/263e1107-2ff9-4b3d-b32f-f380fbc687a0" width="50%" height="50%"> 
+<img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/6792d1aa-0a55-4e90-8e01-72bda70ee3ce" width="50%" height="50%"> 
 
 ## Mesh Smoothing
 ### Explicit Laplacian Mesh Smoothing
@@ -197,6 +197,11 @@ from \(M\), we must first symmetrize
 \large (M - \lambda C) P^{(t+1)} = M P^{(t)}
 ```
 the resulting sparse system is symmetric positive definite and can be solved using methods such as iterative conjugate gradients.
+
+#### Output
+<img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/5d29c7df-efcd-4eca-bfe1-a4446d83546c" width="50%" height="50%"> 
+<img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/b1394aee-87a0-44ba-8ac3-3451b807fec1" width="50%" height="50%"> 
+<img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/9171ba8f-4569-40dc-b432-be27a024ec87" width="50%" height="50%"> 
 
 ## Geodesics in Heat
 This section implements techniques described in the paper [Geodesics in Heat: A New Approach to Computing Distance Based on Heat Flow](https://ddg.math.uni-goettingen.de/pub/GeodesicsInHeat.pdf) by Crane, Weischedel, and Wardetzky. </br>
