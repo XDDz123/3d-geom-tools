@@ -216,7 +216,7 @@ The outline of the heat method can described as follows: </br>
 3. Reconstructions of $\large k_{t,x}$ are found to be extremely sensitive to numerical errors. </br> The paper cirumvents this problem with the following procedure: </br>
    * Given a reconstruction of the heat kernel $\large u$
    * Compute its gradient $\large -\triangledown u$
-   * Then normalize such that the output gradient field $\large X = -\displaystyle{\frac{\triangledown u }{\|\triangledown u\|}}$ is only dependent on the direction of the gradient and robust to errors in magnitude. </br></br>
+   * Then normalize such that the output gradient field $\large X = -\displaystyle{\frac{\triangledown u }{\lVert \triangledown u \rVert}}$ is only dependent on the direction of the gradient and robust to errors in magnitude. </br></br>
 4. Lastly, $\large \phi$ can be computed by minimizing the equation $\large \|\triangledown \phi - X\|^2$. This minimization problem can be solved linearly with $\large \Delta \phi = \triangledown X$.
 ### Implementation
 The geodesic distance on manifolds can be computed with the following steps:
@@ -242,7 +242,7 @@ L_{C_{ij}} = \begin{cases}
 2. Compute the optimal time $\large t = mh^2$, where $\large m=1$ and $\large h$ is the mean distance between all vertices.</br>
 3. Compute the heat flow $\large u$ with $\large (A - tL_C)u = \delta_\gamma$, where the Kronecker delta $\large \delta_\gamma$ is a vector where heat source vertices are set to 1 and other vertices to 0.</br>
 4. Compute the gradient $\triangledown u$ with $\large \triangledown u = \frac{1}{2A_f}\displaystyle{\sum_i u_i(N \times e_i)}$, where $\large A_f$ is the face area, $\large N_i$ is the face normal, and $\large e_i$ is the vector (edge) opposite of the current vertex orientated counter-clockwise.</br>
-5. Compute the normalized vector field $\large X = \triangledown u / \| \triangledown u\|$.</br>
+5. Compute the normalized vector field $\large X = \triangledown u / \lVert \triangledown u\rVert$.</br>
 6. Compute the divergences of $\large X$ with $\large \triangledown\cdot X = \frac{1}{2}\displaystyle{\sum_j cot\theta_1(e_1 \cdot X_j) + cot\theta_2 (e_2 \cdot X_j)}$, where $\large \theta_1$ and $\large \theta_2$ are the 2 remaining vertex angles of the current face $\large j$, $\large e_1$ and $e\large _2$ are the edges opposite to $\large \theta_1$ and $\large \theta_2$ respectively.</br>
 7. Compute the geodesics with $\large L_c\phi=\triangledown\cdot X$ by solving the linear system.
   
