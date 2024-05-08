@@ -192,11 +192,11 @@ Implicit smoothing is computed with the following equations:
 \large (I - \lambda L) P^{(t+1)} = P^{(t)}
 ```
 Since $\large L = M^{-1} C$ is no longer symmetric after the normalization
-from \(M\), we must first symmetrize
+from $\large M$, we must first symmetrize:
 ```math
 \large (M - \lambda C) P^{(t+1)} = M P^{(t)}
 ```
-the resulting sparse system is symmetric positive definite and can be solved using methods such as iterative conjugate gradients.
+The resulting sparse system is symmetric positive definite and can be solved using methods such as iterative conjugate gradients.
 
 #### Output
 <img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/5d29c7df-efcd-4eca-bfe1-a4446d83546c" width="50%" height="50%"> 
@@ -204,7 +204,7 @@ the resulting sparse system is symmetric positive definite and can be solved usi
 <img src="https://github.com/XDDz123/3d-geom-tools/assets/20507222/9171ba8f-4569-40dc-b432-be27a024ec87" width="50%" height="50%"> 
 
 ## Geodesics in Heat
-This section implements techniques described in the paper [Geodesics in Heat: A New Approach to Computing Distance Based on Heat Flow](https://ddg.math.uni-goettingen.de/pub/GeodesicsInHeat.pdf) by Crane, Weischedel, and Wardetzky. </br>
+This section implements techniques described in the paper [Geodesics in Heat: A New Approach to Computing Distance Based on Heat Flow](https://ddg.math.uni-goettingen.de/pub/GeodesicsInHeat.pdf) by Crane, Weischedel, and Wardetzky. </br></br>
 In general terms, the aim is to compute the distance between vertices on a surface mesh or manifold by calculating the geodesic distance based on the physical mechanics of heat flow.  </br></br>
 The outline of the heat method can described as follows: </br>
 1. Standard geodesic distance is computed by solving the [eikonal equation](https://en.wikipedia.org/wiki/Eikonal_equation) $\large |\triangledown\phi| = 1$, where $\phi$ is the geodesic distance. </br>
@@ -241,7 +241,7 @@ L_{C_{ij}} = \begin{cases}
 * For Dirichlet boundary conditions, boundary vertices have $\large L_{C_{ij}} = 0$ for $\large j \in {\mathcal{N_1}}(v_i)$. </br>
 2. Compute the optimal time $\large t = mh^2$, where $\large m=1$ and $\large h$ is the mean distance between all vertices.</br>
 3. Compute the heat flow $\large u$ with $\large (A - tL_C)u = \delta_\gamma$, where the Kronecker delta $\large \delta_\gamma$ is a vector where heat source vertices are set to 1 and other vertices to 0.</br>
-4. Compute the gradient $\triangledown u$ with $\large \triangledown u = \frac{1}{2A_f}\displaystyle{\sum_i u_i(N \times e_i)}$, where $\large A_f$ is the face area, $\large N_i$ is the face normal, and $\large e_i$ is the vector (edge) opposite of the current vertex orientated counter-clockwise.</br>
+4. Compute the gradient $\large \triangledown u$ with $\large \triangledown u = \frac{1}{2A_f}\displaystyle{\sum_i u_i(N \times e_i)}$, where $\large A_f$ is the face area, $\large N_i$ is the face normal, and $\large e_i$ is the vector (edge) opposite of the current vertex orientated counter-clockwise.</br>
 5. Compute the normalized vector field $\large X = \triangledown u / \lVert \triangledown u\rVert$.</br>
 6. Compute the divergences of $\large X$ with $\large \triangledown\cdot X = \frac{1}{2}\displaystyle{\sum_j cot\theta_1(e_1 \cdot X_j) + cot\theta_2 (e_2 \cdot X_j)}$, where $\large \theta_1$ and $\large \theta_2$ are the 2 remaining vertex angles of the current face $\large j$, $\large e_1$ and $e\large _2$ are the edges opposite to $\large \theta_1$ and $\large \theta_2$ respectively.</br>
 7. Compute the geodesics with $\large L_c\phi=\triangledown\cdot X$ by solving the linear system.
